@@ -4,7 +4,8 @@
 
 void LoginPage::connection_close()
 {
-
+    mydb.close();
+    mydb.removeDatabase(QSqlDatabase::defaultConnection);
 }
 
 bool LoginPage::connection_open()
@@ -64,6 +65,7 @@ void LoginPage::on_Login_button_clicked()
             if (count == 1)
             {
                 ui->Status->setText("Login Successfull");
+                connection_close();
                 Questions q_Dialog;
                 q_Dialog.setModal(true);
                 q_Dialog.exec();
