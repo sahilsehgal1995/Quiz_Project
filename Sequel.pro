@@ -19,5 +19,4 @@ HEADERS  += loginpage.h
 
 FORMS    += loginpage.ui
 
-RESOURCES += \
-    MyResource.qrc
+RESOURCES +=
