@@ -6,25 +6,142 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>540</width>
-    <height>384</height>
+    <width>739</width>
+    <height>481</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <widget class="QPushButton" name="pushButton">
+  <widget class="QLabel" name="DatabaseStatus">
    <property name="geometry">
     <rect>
-     <x>250</x>
-     <y>290</y>
-     <width>81</width>
-     <height>23</height>
+     <x>20</x>
+     <y>441</y>
+     <width>121</width>
+     <height>31</height>
     </rect>
    </property>
    <property name="text">
-    <string>PushButton</string>
+    <string>Database Status</string>
    </property>
+  </widget>
+  <widget class="QGroupBox" name="groupBox">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>10</y>
+     <width>561</width>
+     <height>391</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string/>
+   </property>
+   <widget class="QSplitter" name="splitter_3">
+    <property name="geometry">
+     <rect>
+      <x>21</x>
+      <y>41</y>
+      <width>531</width>
+      <height>341</height>
+     </rect>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Vertical</enum>
+    </property>
+    <widget class="QLabel" name="Question">
+     <property name="text">
+      <string>Question</string>
+     </property>
+    </widget>
+    <widget class="QRadioButton" name="OptionA">
+     <property name="text">
+      <string>OptionA</string>
+     </property>
+    </widget>
+    <widget class="QRadioButton" name="OptionB">
+     <property name="text">
+      <string>OptionA</string>
+     </property>
+    </widget>
+    <widget class="QRadioButton" name="OptionC">
+     <property name="text">
+      <string>OptionA</string>
+     </property>
+    </widget>
+    <widget class="QRadioButton" name="OptionD">
+     <property name="text">
+      <string>OptionA</string>
+     </property>
+    </widget>
+   </widget>
+  </widget>
+  <widget class="QSplitter" name="splitter_2">
+   <property name="geometry">
+    <rect>
+     <x>520</x>
+     <y>440</y>
+     <width>201</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Horizontal</enum>
+   </property>
+   <widget class="QPushButton" name="StartTest">
+    <property name="font">
+     <font>
+      <family>Nimbus Roman No9 L</family>
+      <pointsize>14</pointsize>
+      <weight>50</weight>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>Start Test</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="EndTest">
+    <property name="font">
+     <font>
+      <family>Nimbus Roman No9 L</family>
+      <pointsize>14</pointsize>
+      <weight>50</weight>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>Finish Test</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QSplitter" name="splitter">
+   <property name="geometry">
+    <rect>
+     <x>600</x>
+     <y>0</y>
+     <width>121</width>
+     <height>431</height>
+    </rect>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Vertical</enum>
+   </property>
+   <widget class="QLabel" name="label">
+    <property name="font">
+     <font>
+      <family>ori1Uni</family>
+      <pointsize>14</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>Questions</string>
+    </property>
+   </widget>
+   <widget class="QTableView" name="tableView"/>
   </widget>
  </widget>
  <resources/>
