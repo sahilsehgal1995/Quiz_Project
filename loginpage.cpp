@@ -1,5 +1,6 @@
 #include "loginpage.h"
 #include "ui_loginpage.h"
+#include "questions.h"
 
 void LoginPage::connection_close()
 {
@@ -63,6 +64,10 @@ void LoginPage::on_Login_button_clicked()
             if (count == 1)
             {
                 ui->Status->setText("Login Successfull");
+                Questions q_Dialog;
+                q_Dialog.setModal(true);
+                q_Dialog.exec();
+
             }
             else
                 ui->Status->setText("Authentication Failed");

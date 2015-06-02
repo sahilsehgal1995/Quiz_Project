@@ -13,10 +13,13 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        loginpage.cpp
+        loginpage.cpp \
+    questions.cpp
 
-HEADERS  += loginpage.h
+HEADERS  += loginpage.h \
+    questions.h
 
-FORMS    += loginpage.ui
+FORMS    += loginpage.ui \
+    questions.ui
 
 RESOURCES +=
