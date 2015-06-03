@@ -30,6 +30,8 @@ private slots:
 
     void on_tableView_clicked(const QModelIndex &index);
 
+    void on_MarkAnswer_clicked();
+
 private:
     Ui::Questions *ui;
 };
