@@ -32,6 +32,8 @@ private slots:
 
     void on_MarkAnswer_clicked();
 
+    void on_EndTest_clicked();
+
 private:
     Ui::Questions *ui;
 };

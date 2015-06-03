@@ -62,17 +62,17 @@
     </widget>
     <widget class="QRadioButton" name="OptionB">
      <property name="text">
-      <string>OptionA</string>
+      <string>OptionB</string>
      </property>
     </widget>
     <widget class="QRadioButton" name="OptionC">
      <property name="text">
-      <string>OptionA</string>
+      <string>OptionC</string>
      </property>
     </widget>
     <widget class="QRadioButton" name="OptionD">
      <property name="text">
-      <string>OptionA</string>
+      <string>OptionD</string>
      </property>
     </widget>
    </widget>
@@ -154,6 +154,19 @@
    </property>
    <property name="text">
     <string>Mark Answer</string>
+   </property>
+  </widget>
+  <widget class="QRadioButton" name="CorrectAnswer">
+   <property name="geometry">
+    <rect>
+     <x>350</x>
+     <y>430</y>
+     <width>102</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>CorrectAnswer</string>
    </property>
   </widget>
  </widget>

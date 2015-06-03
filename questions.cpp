@@ -4,6 +4,7 @@
 #include <QSqlQueryModel>
 #include <QModelIndex>
 #include <cstdlib>
+#include <QDebug>
 
 void Questions::connection_close()
 {
@@ -37,6 +38,7 @@ Questions::Questions(QWidget *parent) :
     QMessageBox::warning(this,"Warning","Database not connected");
     ui->groupBox->setHidden(true);
     ui->MarkAnswer->setHidden(true);
+    ui->CorrectAnswer->setHidden(true);
 }
 
 Questions::~Questions()
@@ -71,6 +73,7 @@ void Questions::on_StartTest_pressed()
             ui->OptionB->setText(query->value(3).toString());
             ui->OptionC->setText(query->value(4).toString());
             ui->OptionD->setText(query->value(5).toString());
+            ui->CorrectAnswer->setText(query->value(6).toString());
         }
     }
     model->setQuery(*query);
@@ -104,5 +107,39 @@ void Questions::on_tableView_clicked(const QModelIndex &index)
 
 void Questions::on_MarkAnswer_clicked()
 {
+    QString answer, correctanswer;
+    correctanswer = ui->CorrectAnswer->text();
+    if(ui->OptionA->isChecked())
+    {
+        answer= ui->OptionA->text();
+        if (QString::compare(correctanswer, answer, Qt::CaseInsensitive))
+            qDebug()<<"Option A is correct";
+    }
+    else if(ui->OptionB->isChecked())
+    {
+        answer= ui->OptionB->text();
+        if (QString::compare(correctanswer, answer, Qt::CaseInsensitive))
+            qDebug()<<"Option B is correct";
+    }
+    else if(ui->OptionC->isChecked())
+    {
+        answer= ui->OptionC->text();
+        if (QString::compare(correctanswer, answer, Qt::CaseInsensitive))
+            qDebug()<<"Option C is correct";
+    }
+    else if(ui->OptionD->isChecked())
+    {
+        answer= ui->OptionD->text();
+        if (QString::compare(correctanswer, answer, Qt::CaseInsensitive))
+            qDebug()<<"Option D is correct";
+    }
+    else
+        QMessageBox::information(this,"Answer Status","Wrong Answer");
+
     on_StartTest_pressed();
+}
+
+void Questions::on_EndTest_clicked()
+{
+    this->close();
 }
