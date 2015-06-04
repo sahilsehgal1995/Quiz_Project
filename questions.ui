@@ -116,33 +116,6 @@
     </property>
    </widget>
   </widget>
-  <widget class="QSplitter" name="splitter">
-   <property name="geometry">
-    <rect>
-     <x>600</x>
-     <y>0</y>
-     <width>121</width>
-     <height>431</height>
-    </rect>
-   </property>
-   <property name="orientation">
-    <enum>Qt::Vertical</enum>
-   </property>
-   <widget class="QLabel" name="label">
-    <property name="font">
-     <font>
-      <family>ori1Uni</family>
-      <pointsize>14</pointsize>
-      <weight>75</weight>
-      <bold>true</bold>
-     </font>
-    </property>
-    <property name="text">
-     <string>Questions</string>
-    </property>
-   </widget>
-   <widget class="QTableView" name="tableView"/>
-  </widget>
   <widget class="QPushButton" name="MarkAnswer">
    <property name="geometry">
     <rect>
@@ -168,6 +141,38 @@
    <property name="text">
     <string>CorrectAnswer</string>
    </property>
+  </widget>
+  <widget class="QSplitter" name="splitter">
+   <property name="geometry">
+    <rect>
+     <x>590</x>
+     <y>30</y>
+     <width>131</width>
+     <height>81</height>
+    </rect>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Vertical</enum>
+   </property>
+   <widget class="QLabel" name="RemainigTime">
+    <property name="text">
+     <string>Remaining Time</string>
+    </property>
+   </widget>
+   <widget class="QLCDNumber" name="ledNumber">
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
+    </property>
+    <property name="digitCount">
+     <number>12</number>
+    </property>
+    <property name="segmentStyle">
+     <enum>QLCDNumber::Outline</enum>
+    </property>
+    <property name="value" stdset="0">
+     <double>3.000000000000000</double>
+    </property>
+   </widget>
   </widget>
  </widget>
  <resources/>

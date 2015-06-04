@@ -4,6 +4,8 @@
 #include <QSqlQueryModel>
 #include <QModelIndex>
 #include <cstdlib>
+#include <QTime>
+#include <QTimer>
 #include <QDebug>
 
 void Questions::connection_close()
@@ -39,6 +41,18 @@ Questions::Questions(QWidget *parent) :
     ui->groupBox->setHidden(true);
     ui->MarkAnswer->setHidden(true);
     ui->CorrectAnswer->setHidden(true);
+
+    mytimer = new QTimer(this);
+
+    minutes = 5;
+    seconds = 0;
+    i = -1;
+    timevalue = new QTime(0,5,0,0);
+
+    QString val= timevalue->toString();
+    ui->ledNumber->display(val);
+
+    connect(mytimer, SIGNAL(timeout()),this, SLOT(timeoutslot()));
 }
 
 Questions::~Questions()
@@ -54,6 +68,8 @@ void Questions::on_StartTest_pressed()
     QMessageBox::warning(this,"Warning","Database not connected");
 
     ui->groupBox->setHidden(false);
+    mytimer->start(1000);
+
 
     QSqlQueryModel *model = new QSqlQueryModel();
     QSqlQuery *query = new QSqlQuery(QuestionsDatabase);
@@ -78,31 +94,6 @@ void Questions::on_StartTest_pressed()
     }
     model->setQuery(*query);
 
-}
-
-void Questions::on_tableView_clicked(const QModelIndex &index)
-{
-    ui->groupBox->setHidden(false);
-    QString id = ui->tableView->model()->data(index).toString();
-    if(!connection_open())
-    QMessageBox::warning(this,"Warning","Database not connected");
-
-    QSqlQueryModel *model = new QSqlQueryModel();
-    QSqlQuery *query = new QSqlQuery(QuestionsDatabase);
-
-    query->prepare("select * from questions where id ='"+id+"';");
-    if(query->exec())
-    {
-        while(query->next())
-        {
-            ui->Question->setText(query->value(1).toString());
-            ui->OptionA->setText(query->value(2).toString());
-            ui->OptionB->setText(query->value(3).toString());
-            ui->OptionC->setText(query->value(4).toString());
-            ui->OptionD->setText(query->value(5).toString());
-        }
-    }
-    model->setQuery(*query);
 }
 
 void Questions::on_MarkAnswer_clicked()
@@ -142,4 +133,14 @@ void Questions::on_MarkAnswer_clicked()
 void Questions::on_EndTest_clicked()
 {
     this->close();
+}
+
+void Questions::timeoutslot()
+{
+    QTime TimeChange;
+    TimeChange.setHMS(0,minutes,seconds,0);
+    TimeChange = TimeChange.addSecs(i);
+    QString val = TimeChange.toString();
+    ui->ledNumber->display(val);
+    i = i-1;
 }

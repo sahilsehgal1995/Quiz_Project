@@ -5,6 +5,8 @@
 #include <QSqlDatabase>
 #include <QFileInfo>
 #include <QSqlQuery>
+#include <QTime>
+#include <QTimer>
 
 namespace Ui {
 class Questions;
@@ -34,8 +36,18 @@ private slots:
 
     void on_EndTest_clicked();
 
+    void on_StartTest_clicked();
+
 private:
     Ui::Questions *ui;
+
+public:
+    QTimer *mytimer;
+    QTime *timevalue;
+    int minutes,seconds,i;
+
+public slots:
+    void timeoutslot();
 };
 
 #endif // QUESTIONS_H
