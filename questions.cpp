@@ -137,10 +137,18 @@ void Questions::on_EndTest_clicked()
 
 void Questions::timeoutslot()
 {
-    QTime TimeChange;
+    QTime TimeChange, TimeOver;
+    TimeOver.setHMS(0,0,0,0);
     TimeChange.setHMS(0,minutes,seconds,0);
     TimeChange = TimeChange.addSecs(i);
-    QString val = TimeChange.toString();
-    ui->ledNumber->display(val);
-    i = i-1;
+    if(TimeChange.toString() == TimeOver.toString())
+    {
+        on_EndTest_clicked();
+    }
+    else
+    {
+        QString val = TimeChange.toString();
+        ui->ledNumber->display(val);
+        i = i-1;
+    }
 }
