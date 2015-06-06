@@ -74,7 +74,7 @@ void Questions::on_StartTest_pressed()
     QSqlQueryModel *model = new QSqlQueryModel();
     QSqlQuery *query = new QSqlQuery(QuestionsDatabase);
 
-    int number=4;
+    int number=41;
     int randomValue =rand() %number;
     QString id = QString::number(randomValue);
 
