@@ -146,9 +146,9 @@
    <property name="geometry">
     <rect>
      <x>590</x>
-     <y>30</y>
+     <y>20</y>
      <width>131</width>
-     <height>81</height>
+     <height>71</height>
     </rect>
    </property>
    <property name="orientation">
