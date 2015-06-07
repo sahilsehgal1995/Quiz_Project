@@ -53,6 +53,24 @@ Questions::Questions(QWidget *parent) :
     ui->ledNumber->display(val);
 
     connect(mytimer, SIGNAL(timeout()),this, SLOT(timeoutslot()));
+
+    QTime time = QTime::currentTime();
+    qsrand((uint)time.msec());
+
+    QList<int> qlist;
+    int count=10;
+    while(count){
+        int x = qrand() % ((40 + 1) - 1) + 1;
+        int index = qlist.indexOf(x);
+        if(index==-1){
+            qlist.append(x);
+            count--;
+    }
+    }
+
+    foreach (int num, qlist) {
+       qDebug()<<num;
+    }
 }
 
 Questions::~Questions()
