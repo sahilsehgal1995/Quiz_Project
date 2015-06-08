@@ -78,6 +78,7 @@ void Questions::QuestionList()
             QString string = QString("Question %1").arg(i++);
             QuestionMapping[string]= x;
             ui->questionlist->addItem(string);
+            Responses[string] = "Wrong Answer";
             count--;
         }
     }
@@ -104,6 +105,8 @@ void Questions::on_MarkAnswer_clicked()
 {
     QListWidgetItem *itm = ui->questionlist->currentItem();
     itm->setBackgroundColor(Qt::green);
+    int y;
+
     QString answer, correctanswer;
     correctanswer = ui->CorrectAnswer->text();
     int x;
@@ -113,10 +116,16 @@ void Questions::on_MarkAnswer_clicked()
         x = (QString::compare(correctanswer, answer, Qt::CaseInsensitive));
         if (x==0)
         {
-            qDebug()<<"correct answer";
+            y=(QString::compare(Responses[itm->text()], "Wrong Answer", Qt::CaseInsensitive));
+            if(y==0)
+            {
+                Responses[itm->text()]="Correct Answer";
+            }
         }
         else
-            qDebug()<<"Wrong Answer";
+           {
+                Responses[itm->text()]="Wrong Answer";
+           }
     }
     else if(ui->OptionB->isChecked())
     {
@@ -124,10 +133,16 @@ void Questions::on_MarkAnswer_clicked()
         x = (QString::compare(correctanswer, answer, Qt::CaseInsensitive));
         if (x==0)
         {
-            qDebug()<<"correct answer";
+            y=(QString::compare(Responses[itm->text()], "Wrong Answer", Qt::CaseInsensitive));
+            if(y==0)
+            {
+                Responses[itm->text()]="Correct Answer";
+            }
         }
         else
-            qDebug()<<"Wrong Answer";
+        {
+             Responses[itm->text()]="Wrong Answer";
+        }
     }
     else if(ui->OptionC->isChecked())
     {
@@ -135,10 +150,16 @@ void Questions::on_MarkAnswer_clicked()
         x = (QString::compare(correctanswer, answer, Qt::CaseInsensitive));
         if (x==0)
         {
-            qDebug()<<"correct answer";
+            y=(QString::compare(Responses[itm->text()], "Wrong Answer", Qt::CaseInsensitive));
+            if(y==0)
+            {
+                Responses[itm->text()]="Correct Answer";
+            }
         }
         else
-            qDebug()<<"Wrong Answer";
+        {
+             Responses[itm->text()]="Wrong Answer";
+        }
     }
     else if(ui->OptionD->isChecked())
     {
@@ -146,12 +167,17 @@ void Questions::on_MarkAnswer_clicked()
         x = (QString::compare(correctanswer, answer, Qt::CaseInsensitive));
         if (x==0)
         {
-            qDebug()<<"correct answer";
+            y=(QString::compare(Responses[itm->text()], "Wrong Answer", Qt::CaseInsensitive));
+            if(y==0)
+            {
+                Responses[itm->text()]="Correct Answer";
+            }
         }
         else
-            qDebug()<<"Wrong Answer";
+        {
+             Responses[itm->text()]="Wrong Answer";
+        }
     }
-
 
     QButtonGroup *group = new QButtonGroup(this);
     group->addButton(ui->OptionA);
@@ -172,8 +198,21 @@ void Questions::on_MarkAnswer_clicked()
 
 void Questions::on_EndTest_clicked()
 {
+    int score=0,x;
+    QHash<QString, QString>::const_iterator i = Responses.constBegin();
+     while (i != Responses.constEnd())
+     {
+         qDebug()<< i.key() << ": " << i.value();
+         x=(QString::compare(i.value(), "Correct Answer", Qt::CaseInsensitive));
+         if(x==0)
+         {
+             ++score;
+         }
+         ++i;
+     }
+    QString Finalscore = "Your Final Score is " + QString::number(score);
     this->close();
-    QMessageBox::information(this,"Test completition", "Test Over");
+    QMessageBox::information(this,"Test completition", Finalscore);
 }
 
 void Questions::timeoutslot()

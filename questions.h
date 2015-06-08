@@ -45,6 +45,7 @@ private:
     Ui::Questions *ui;
     QList<int> qlist;
     QHash<QString, int> QuestionMapping;
+    QHash<QString, QString> Responses;
 
 public:
     QTimer *mytimer;
