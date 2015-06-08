@@ -24,6 +24,7 @@ public:
 public:
     explicit Questions(QWidget *parent = 0);
     ~Questions();
+    void QuestionList();
 
 private slots:
     void on_StartTest_pressed();
@@ -38,8 +39,12 @@ private slots:
 
     void on_StartTest_clicked();
 
+    void on_questionlist_itemSelectionChanged();
+
 private:
     Ui::Questions *ui;
+    QList<int> qlist;
+    QHash<QString, int> QuestionMapping;
 
 public:
     QTimer *mytimer;

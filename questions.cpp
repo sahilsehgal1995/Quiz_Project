@@ -41,6 +41,8 @@ Questions::Questions(QWidget *parent) :
     ui->groupBox->setHidden(true);
     ui->MarkAnswer->setHidden(true);
     ui->CorrectAnswer->setHidden(true);
+    ui->questionlist->setHidden(true);
+    ui->QuestionListLabel->setHidden(true);
 
     mytimer = new QTimer(this);
 
@@ -53,24 +55,7 @@ Questions::Questions(QWidget *parent) :
     ui->ledNumber->display(val);
 
     connect(mytimer, SIGNAL(timeout()),this, SLOT(timeoutslot()));
-
-    QTime time = QTime::currentTime();
-    qsrand((uint)time.msec());
-
-    QList<int> qlist;
-    int count=10;
-    while(count){
-        int x = qrand() % ((40 + 1) - 1) + 1;
-        int index = qlist.indexOf(x);
-        if(index==-1){
-            qlist.append(x);
-            count--;
-    }
-    }
-
-    foreach (int num, qlist) {
-       qDebug()<<num;
-    }
+    QuestionList();
 }
 
 Questions::~Questions()
@@ -78,44 +63,46 @@ Questions::~Questions()
     delete ui;
 }
 
-void Questions::on_StartTest_pressed()
+void Questions::QuestionList()
 {
-    ui->StartTest->setVisible(false);
-    ui->MarkAnswer->setHidden(false);
-    if(!connection_open())
-    QMessageBox::warning(this,"Warning","Database not connected");
-
-    ui->groupBox->setHidden(false);
-    mytimer->start(1000);
-
-
-    QSqlQueryModel *model = new QSqlQueryModel();
-    QSqlQuery *query = new QSqlQuery(QuestionsDatabase);
-
-    int number=41;
-    int randomValue =rand() %number;
-    QString id = QString::number(randomValue);
-
-    query->prepare("select * from questions where id = '"+ id +"';");
-
-    if(query->exec())
-    {
-        while(query->next())
+    QTime time = QTime::currentTime();
+    qsrand((uint)time.msec());
+    int count=10, i=1;
+    while(count){
+        int x = qrand() % ((40 + 1) - 1) + 1;
+        int index = qlist.indexOf(x);
+        if(index==-1)
         {
-            ui->Question->setText(query->value(1).toString());
-            ui->OptionA->setText(query->value(2).toString());
-            ui->OptionB->setText(query->value(3).toString());
-            ui->OptionC->setText(query->value(4).toString());
-            ui->OptionD->setText(query->value(5).toString());
-            ui->CorrectAnswer->setText(query->value(6).toString());
+            qlist.append(x);
+            QString string = QString("Question %1").arg(i++);
+            QuestionMapping[string]= x;
+            ui->questionlist->addItem(string);
+            count--;
         }
     }
-    model->setQuery(*query);
+}
+
+void Questions::on_StartTest_pressed()
+{
+
+    if(!connection_open())
+    QMessageBox::warning(this,"Warning","Database not connected");
+    else
+    {
+        ui->StartTest->setVisible(false);
+        ui->MarkAnswer->setHidden(false);
+        ui->groupBox->setHidden(false);
+        ui->questionlist->setHidden(false);
+        ui->QuestionListLabel->setVisible(true);
+        mytimer->start(1000);
+    }
 
 }
 
 void Questions::on_MarkAnswer_clicked()
 {
+    QListWidgetItem *itm = ui->questionlist->currentItem();
+    itm->setBackgroundColor(Qt::green);
     QString answer, correctanswer;
     correctanswer = ui->CorrectAnswer->text();
     if(ui->OptionA->isChecked())
@@ -169,4 +156,34 @@ void Questions::timeoutslot()
         ui->ledNumber->display(val);
         i = i-1;
     }
+}
+
+void Questions::on_questionlist_itemSelectionChanged()
+{
+    if(!connection_open())
+    QMessageBox::warning(this,"Warning","Database not connected");
+
+    QListWidgetItem *itm = ui->questionlist->currentItem();
+    int val = QuestionMapping.value(itm->text());
+
+    QSqlQueryModel *model = new QSqlQueryModel();
+    QSqlQuery *query = new QSqlQuery(QuestionsDatabase);
+
+    QString id = QString::number(val);
+
+    query->prepare("select * from questions where id = '"+ id +"';");
+
+    if(query->exec())
+    {
+        while(query->next())
+        {
+            ui->Question->setText(query->value(1).toString());
+            ui->OptionA->setText(query->value(2).toString());
+            ui->OptionB->setText(query->value(3).toString());
+            ui->OptionC->setText(query->value(4).toString());
+            ui->OptionD->setText(query->value(5).toString());
+            ui->CorrectAnswer->setText(query->value(6).toString());
+        }
+    }
+    model->setQuery(*query);
 }
