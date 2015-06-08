@@ -132,8 +132,8 @@
   <widget class="QRadioButton" name="CorrectAnswer">
    <property name="geometry">
     <rect>
-     <x>350</x>
-     <y>430</y>
+     <x>600</x>
+     <y>390</y>
      <width>102</width>
      <height>21</height>
     </rect>
@@ -171,6 +171,37 @@
     </property>
     <property name="value" stdset="0">
      <double>3.000000000000000</double>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QSplitter" name="splitter_4">
+   <property name="geometry">
+    <rect>
+     <x>590</x>
+     <y>110</y>
+     <width>131</width>
+     <height>271</height>
+    </rect>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Vertical</enum>
+   </property>
+   <widget class="QLabel" name="QuestionListLabel">
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Questions List</string>
+    </property>
+   </widget>
+   <widget class="QListWidget" name="questionlist">
+    <property name="font">
+     <font>
+      <family>Rachana</family>
+      <pointsize>12</pointsize>
+     </font>
     </property>
    </widget>
   </widget>
