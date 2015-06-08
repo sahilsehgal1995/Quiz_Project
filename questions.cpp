@@ -7,6 +7,7 @@
 #include <QTime>
 #include <QTimer>
 #include <QDebug>
+#include <QButtonGroup>
 
 void Questions::connection_close()
 {
@@ -105,32 +106,66 @@ void Questions::on_MarkAnswer_clicked()
     itm->setBackgroundColor(Qt::green);
     QString answer, correctanswer;
     correctanswer = ui->CorrectAnswer->text();
+    int x;
     if(ui->OptionA->isChecked())
     {
         answer= ui->OptionA->text();
-        if (QString::compare(correctanswer, answer, Qt::CaseInsensitive))
-            qDebug()<<"Option A is correct";
+        x = (QString::compare(correctanswer, answer, Qt::CaseInsensitive));
+        if (x==0)
+        {
+            qDebug()<<"correct answer";
+        }
+        else
+            qDebug()<<"Wrong Answer";
     }
     else if(ui->OptionB->isChecked())
     {
         answer= ui->OptionB->text();
-        if (QString::compare(correctanswer, answer, Qt::CaseInsensitive))
-            qDebug()<<"Option B is correct";
+        x = (QString::compare(correctanswer, answer, Qt::CaseInsensitive));
+        if (x==0)
+        {
+            qDebug()<<"correct answer";
+        }
+        else
+            qDebug()<<"Wrong Answer";
     }
     else if(ui->OptionC->isChecked())
     {
         answer= ui->OptionC->text();
-        if (QString::compare(correctanswer, answer, Qt::CaseInsensitive))
-            qDebug()<<"Option C is correct";
+        x = (QString::compare(correctanswer, answer, Qt::CaseInsensitive));
+        if (x==0)
+        {
+            qDebug()<<"correct answer";
+        }
+        else
+            qDebug()<<"Wrong Answer";
     }
     else if(ui->OptionD->isChecked())
     {
         answer= ui->OptionD->text();
-        if (QString::compare(correctanswer, answer, Qt::CaseInsensitive))
-            qDebug()<<"Option D is correct";
+        x = (QString::compare(correctanswer, answer, Qt::CaseInsensitive));
+        if (x==0)
+        {
+            qDebug()<<"correct answer";
+        }
+        else
+            qDebug()<<"Wrong Answer";
     }
-    else
-        QMessageBox::information(this,"Answer Status","Wrong Answer");
+
+
+    QButtonGroup *group = new QButtonGroup(this);
+    group->addButton(ui->OptionA);
+    group->addButton(ui->OptionB);
+    group->addButton(ui->OptionC);
+    group->addButton(ui->OptionD);
+
+    QAbstractButton* checked = group->checkedButton();
+    if (checked)
+    {
+        group->setExclusive(false);
+        checked->setChecked(false);
+        group->setExclusive(true);
+    }
 
     on_StartTest_pressed();
 }
@@ -138,6 +173,7 @@ void Questions::on_MarkAnswer_clicked()
 void Questions::on_EndTest_clicked()
 {
     this->close();
+    QMessageBox::information(this,"Test completition", "Test Over");
 }
 
 void Questions::timeoutslot()

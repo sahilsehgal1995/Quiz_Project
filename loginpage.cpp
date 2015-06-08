@@ -69,6 +69,7 @@ void LoginPage::on_Login_button_clicked()
                 Questions q_Dialog;
                 q_Dialog.setModal(true);
                 q_Dialog.exec();
+                this->close();
 
             }
             else
