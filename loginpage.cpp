@@ -22,6 +22,10 @@ LoginPage::LoginPage(QWidget *parent) :
 {
     ui->setupUi(this);
     ui->statusBar->setWindowTitle("Automatic Quiz Application");
+    ui->statusBar->setHidden(false);
+    ui->statusBar->setWindowOpacity(0.5);
+
+    ui->statusBar->showMessage("University Institute of Engineering Technology, Panjab University");
     mydb = QSqlDatabase::addDatabase("QSQLITE");
     mydb.setDatabaseName("/home/sahil/qt/sequel/Sequel/loginusers.db");
 
