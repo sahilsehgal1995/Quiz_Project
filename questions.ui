@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>739</width>
-    <height>481</height>
+    <height>492</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -76,58 +76,8 @@
      </property>
     </widget>
    </widget>
-  </widget>
-  <widget class="QSplitter" name="splitter_2">
-   <property name="geometry">
-    <rect>
-     <x>520</x>
-     <y>440</y>
-     <width>201</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="orientation">
-    <enum>Qt::Horizontal</enum>
-   </property>
-   <widget class="QPushButton" name="StartTest">
-    <property name="font">
-     <font>
-      <family>Nimbus Roman No9 L</family>
-      <pointsize>14</pointsize>
-      <weight>50</weight>
-      <bold>false</bold>
-     </font>
-    </property>
-    <property name="text">
-     <string>Start Test</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="EndTest">
-    <property name="font">
-     <font>
-      <family>Nimbus Roman No9 L</family>
-      <pointsize>14</pointsize>
-      <weight>50</weight>
-      <bold>false</bold>
-     </font>
-    </property>
-    <property name="text">
-     <string>Finish Test</string>
-    </property>
-   </widget>
-  </widget>
-  <widget class="QPushButton" name="MarkAnswer">
-   <property name="geometry">
-    <rect>
-     <x>220</x>
-     <y>430</y>
-     <width>101</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Mark Answer</string>
-   </property>
+   <zorder>splitter_3</zorder>
+   <zorder>splitter_6</zorder>
   </widget>
   <widget class="QRadioButton" name="CorrectAnswer">
    <property name="geometry">
@@ -204,6 +154,91 @@
      </font>
     </property>
    </widget>
+  </widget>
+  <widget class="QSplitter" name="splitter_7">
+   <property name="geometry">
+    <rect>
+     <x>530</x>
+     <y>430</y>
+     <width>201</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Horizontal</enum>
+   </property>
+   <widget class="QPushButton" name="StartTest">
+    <property name="font">
+     <font>
+      <family>Nimbus Roman No9 L</family>
+      <pointsize>14</pointsize>
+      <weight>50</weight>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>Start Test</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="EndTest">
+    <property name="font">
+     <font>
+      <family>Nimbus Roman No9 L</family>
+      <pointsize>14</pointsize>
+      <weight>50</weight>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>Finish Test</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QWidget" name="">
+   <property name="geometry">
+    <rect>
+     <x>250</x>
+     <y>420</y>
+     <width>223</width>
+     <height>54</height>
+    </rect>
+   </property>
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="0">
+     <widget class="QSplitter" name="splitter_2">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <widget class="QPushButton" name="UnMarkAnswer">
+       <property name="text">
+        <string>UnMark Answer</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="MarkAnswer">
+       <property name="text">
+        <string>Mark Answer</string>
+       </property>
+      </widget>
+     </widget>
+    </item>
+    <item row="1" column="0">
+     <widget class="QSplitter" name="splitter_5">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <widget class="QPushButton" name="PreviousQuestion">
+       <property name="text">
+        <string>Previous Question</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="NextQuestion">
+       <property name="text">
+        <string>Next Question</string>
+       </property>
+      </widget>
+     </widget>
+    </item>
+   </layout>
   </widget>
  </widget>
  <resources/>

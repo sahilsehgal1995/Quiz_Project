@@ -41,11 +41,16 @@ private slots:
 
     void on_questionlist_itemSelectionChanged();
 
+    void on_UnMarkAnswer_clicked();
+
+    void on_NextQuestion_clicked();
+
 private:
     Ui::Questions *ui;
     QList<int> qlist;
     QHash<QString, int> QuestionMapping;
     QHash<QString, QString> Responses;
+    int NumberofQuestions;
 
 public:
     QTimer *mytimer;

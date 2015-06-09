@@ -44,6 +44,10 @@ Questions::Questions(QWidget *parent) :
     ui->CorrectAnswer->setHidden(true);
     ui->questionlist->setHidden(true);
     ui->QuestionListLabel->setHidden(true);
+    ui->UnMarkAnswer->setHidden(true);
+    ui->NextQuestion->setHidden(true);
+    ui->PreviousQuestion->setHidden(true);
+    NumberofQuestions=10;
 
     mytimer = new QTimer(this);
 
@@ -68,7 +72,8 @@ void Questions::QuestionList()
 {
     QTime time = QTime::currentTime();
     qsrand((uint)time.msec());
-    int count=10, i=1;
+    int count, i=1;
+    count=NumberofQuestions;
     while(count){
         int x = qrand() % ((40 + 1) - 1) + 1;
         int index = qlist.indexOf(x);
@@ -96,7 +101,11 @@ void Questions::on_StartTest_pressed()
         ui->groupBox->setHidden(false);
         ui->questionlist->setHidden(false);
         ui->QuestionListLabel->setVisible(true);
+        ui->UnMarkAnswer->setHidden(false);
+        ui->NextQuestion->setHidden(false);
+        ui->PreviousQuestion->setHidden(false);
         mytimer->start(1000);
+        ui->questionlist->setCurrentRow(0);
     }
 
 }
@@ -178,22 +187,7 @@ void Questions::on_MarkAnswer_clicked()
              Responses[itm->text()]="Wrong Answer";
         }
     }
-
-    QButtonGroup *group = new QButtonGroup(this);
-    group->addButton(ui->OptionA);
-    group->addButton(ui->OptionB);
-    group->addButton(ui->OptionC);
-    group->addButton(ui->OptionD);
-
-    QAbstractButton* checked = group->checkedButton();
-    if (checked)
-    {
-        group->setExclusive(false);
-        checked->setChecked(false);
-        group->setExclusive(true);
-    }
-
-    on_StartTest_pressed();
+    on_NextQuestion_clicked();
 }
 
 void Questions::on_EndTest_clicked()
@@ -238,6 +232,20 @@ void Questions::on_questionlist_itemSelectionChanged()
     if(!connection_open())
     QMessageBox::warning(this,"Warning","Database not connected");
 
+    QButtonGroup *group = new QButtonGroup(this);
+    group->addButton(ui->OptionA);
+    group->addButton(ui->OptionB);
+    group->addButton(ui->OptionC);
+    group->addButton(ui->OptionD);
+
+    QAbstractButton* checked = group->checkedButton();
+    if (checked)
+    {
+        group->setExclusive(false);
+        checked->setChecked(false);
+        group->setExclusive(true);
+    }
+
     QListWidgetItem *itm = ui->questionlist->currentItem();
     int val = QuestionMapping.value(itm->text());
 
@@ -261,4 +269,34 @@ void Questions::on_questionlist_itemSelectionChanged()
         }
     }
     model->setQuery(*query);
+}
+
+void Questions::on_UnMarkAnswer_clicked()
+{
+    QListWidgetItem *itm = ui->questionlist->currentItem();
+    itm->setBackgroundColor(Qt::white);
+    Responses[itm->text()]= "Wrong Answer";
+    QButtonGroup *group = new QButtonGroup(this);
+    group->addButton(ui->OptionA);
+    group->addButton(ui->OptionB);
+    group->addButton(ui->OptionC);
+    group->addButton(ui->OptionD);
+
+    QAbstractButton* checked = group->checkedButton();
+    if (checked)
+    {
+        group->setExclusive(false);
+        checked->setChecked(false);
+        group->setExclusive(true);
+    }
+
+}
+
+void Questions::on_NextQuestion_clicked()
+{
+    int row = ui->questionlist->currentRow();
+    if(row != NumberofQuestions-1)
+    ui->questionlist->setCurrentRow(row+1);
+    else
+        ui->questionlist->setCurrentRow(0);
 }
