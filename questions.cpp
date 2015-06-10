@@ -136,6 +136,7 @@ void Questions::on_MarkAnswer_clicked()
            {
                 Responses[itm->text()]="Wrong Answer";
            }
+        on_NextQuestion_clicked();
     }
     else if(ui->OptionB->isChecked())
     {
@@ -154,6 +155,7 @@ void Questions::on_MarkAnswer_clicked()
         {
              Responses[itm->text()]="Wrong Answer";
         }
+        on_NextQuestion_clicked();
     }
     else if(ui->OptionC->isChecked())
     {
@@ -172,6 +174,7 @@ void Questions::on_MarkAnswer_clicked()
         {
              Responses[itm->text()]="Wrong Answer";
         }
+        on_NextQuestion_clicked();
     }
     else if(ui->OptionD->isChecked())
     {
@@ -190,8 +193,10 @@ void Questions::on_MarkAnswer_clicked()
         {
              Responses[itm->text()]="Wrong Answer";
         }
+        on_NextQuestion_clicked();
     }
-    on_NextQuestion_clicked();
+    else
+        on_questionlist_itemSelectionChanged();
 }
 
 void Questions::on_EndTest_clicked()
@@ -325,4 +330,13 @@ void Questions::on_NextQuestion_clicked()
     ui->questionlist->setCurrentRow(row+1);
     else
         ui->questionlist->setCurrentRow(0);
+}
+
+void Questions::on_PreviousQuestion_clicked()
+{
+    int row = ui->questionlist->currentRow();
+    if(row != 0)
+    ui->questionlist->setCurrentRow(row-1);
+    else
+        ui->questionlist->setCurrentRow(NumberofQuestions-1);
 }

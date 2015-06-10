@@ -45,6 +45,8 @@ private slots:
 
     void on_NextQuestion_clicked();
 
+    void on_PreviousQuestion_clicked();
+
 private:
     Ui::Questions *ui;
     QList<int> qlist;
