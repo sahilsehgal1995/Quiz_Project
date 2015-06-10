@@ -211,8 +211,9 @@ void Questions::on_EndTest_clicked()
 
 void Questions::timeoutslot()
 {
-    QTime TimeChange, TimeOver;
+    QTime TimeChange, TimeOver, LastTime;
     TimeOver.setHMS(0,0,0,0);
+    LastTime.setHMS(0,1,0,0);
     TimeChange.setHMS(0,minutes,seconds,0);
     TimeChange = TimeChange.addSecs(i);
     if(TimeChange.toString() == TimeOver.toString())
@@ -222,6 +223,10 @@ void Questions::timeoutslot()
     else
     {
         QString val = TimeChange.toString();
+        if(TimeChange.toString() == LastTime.toString())
+        {
+            ui->ledNumber->setPalette(Qt::red);
+        }
         ui->ledNumber->display(val);
         i = i-1;
     }
