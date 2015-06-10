@@ -122,6 +122,7 @@ void Questions::on_MarkAnswer_clicked()
     if(ui->OptionA->isChecked())
     {
         answer= ui->OptionA->text();
+        OptionMarked[itm->text()]=1;
         x = (QString::compare(correctanswer, answer, Qt::CaseInsensitive));
         if (x==0)
         {
@@ -139,6 +140,7 @@ void Questions::on_MarkAnswer_clicked()
     else if(ui->OptionB->isChecked())
     {
         answer= ui->OptionB->text();
+        OptionMarked[itm->text()]=2;
         x = (QString::compare(correctanswer, answer, Qt::CaseInsensitive));
         if (x==0)
         {
@@ -156,6 +158,7 @@ void Questions::on_MarkAnswer_clicked()
     else if(ui->OptionC->isChecked())
     {
         answer= ui->OptionC->text();
+        OptionMarked[itm->text()]=3;
         x = (QString::compare(correctanswer, answer, Qt::CaseInsensitive));
         if (x==0)
         {
@@ -173,6 +176,7 @@ void Questions::on_MarkAnswer_clicked()
     else if(ui->OptionD->isChecked())
     {
         answer= ui->OptionD->text();
+        OptionMarked[itm->text()]=4;
         x = (QString::compare(correctanswer, answer, Qt::CaseInsensitive));
         if (x==0)
         {
@@ -237,19 +241,7 @@ void Questions::on_questionlist_itemSelectionChanged()
     if(!connection_open())
     QMessageBox::warning(this,"Warning","Database not connected");
 
-    QButtonGroup *group = new QButtonGroup(this);
-    group->addButton(ui->OptionA);
-    group->addButton(ui->OptionB);
-    group->addButton(ui->OptionC);
-    group->addButton(ui->OptionD);
 
-    QAbstractButton* checked = group->checkedButton();
-    if (checked)
-    {
-        group->setExclusive(false);
-        checked->setChecked(false);
-        group->setExclusive(true);
-    }
 
     QListWidgetItem *itm = ui->questionlist->currentItem();
     int val = QuestionMapping.value(itm->text());
@@ -273,6 +265,35 @@ void Questions::on_questionlist_itemSelectionChanged()
             ui->CorrectAnswer->setText(query->value(6).toString());
         }
     }
+    switch (OptionMarked[itm->text()])
+    {
+    case 1:ui->OptionA->setChecked(true);
+        break;
+    case 2:ui->OptionB->setChecked(true);
+        break;
+    case 3:ui->OptionC->setChecked(true);
+        break;
+    case 4:ui->OptionD->setChecked(true);
+        break;
+    default:
+    {
+        QButtonGroup *group = new QButtonGroup(this);
+        group->addButton(ui->OptionA);
+        group->addButton(ui->OptionB);
+        group->addButton(ui->OptionC);
+        group->addButton(ui->OptionD);
+
+        QAbstractButton* checked = group->checkedButton();
+        if (checked)
+        {
+            group->setExclusive(false);
+            checked->setChecked(false);
+            group->setExclusive(true);
+        }
+        break;
+    }
+    }
+
     model->setQuery(*query);
 }
 

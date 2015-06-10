@@ -50,6 +50,7 @@ private:
     QList<int> qlist;
     QHash<QString, int> QuestionMapping;
     QHash<QString, QString> Responses;
+    QHash<QString, int> OptionMarked;
     int NumberofQuestions;
 
 public:
