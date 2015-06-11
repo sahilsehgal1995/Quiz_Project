@@ -72,6 +72,7 @@ void LoginPage::on_Login_button_clicked()
                 connection_close();
                 Questions q_Dialog;
                 q_Dialog.setModal(true);
+                q_Dialog.loginid(username);
                 q_Dialog.exec();
                 this->close();
 
