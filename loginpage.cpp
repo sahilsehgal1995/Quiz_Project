@@ -1,7 +1,7 @@
 #include "loginpage.h"
 #include "ui_loginpage.h"
 #include "questions.h"
-
+#include <QDebug>
 void LoginPage::connection_close()
 {
     mydb.close();
@@ -44,6 +44,21 @@ LoginPage::~LoginPage()
 {
     delete ui;
 }
+void LoginPage::DatabaseUpdation(const QString &username)
+{
+    if(!connection_open())
+    {
+        ui->database_status->setText("Database not Connected");
+    }
+    else
+    {
+        ui->database_status->setText("Connected");
+        QSqlQuery query;
+        query.prepare("update record set status='not allowed' where rno = '"+ username + "'");
+        if(query.exec())
+        return;
+    }
+}
 
 void LoginPage::on_Login_button_clicked()
 {
@@ -69,6 +84,7 @@ void LoginPage::on_Login_button_clicked()
             if (count == 1)
             {
                 ui->Status->setText("Login Successfull");
+                DatabaseUpdation(username);
                 connection_close();
                 Questions q_Dialog;
                 q_Dialog.setModal(true);

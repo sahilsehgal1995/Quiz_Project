@@ -27,6 +27,7 @@ private slots:
 
 private:
     Ui::LoginPage *ui;
+    void DatabaseUpdation(const QString &username);
 };
 
 #endif // LOGINPAGE_H
