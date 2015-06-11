@@ -46,6 +46,7 @@ Questions::Questions(QWidget *parent) :
     ui->QuestionListLabel->setHidden(true);
     ui->UnMarkAnswer->setHidden(true);
     ui->NextQuestion->setHidden(true);
+    ui->Question->viewport()->setAutoFillBackground(false);
     ui->PreviousQuestion->setHidden(true);
     NumberofQuestions=10;
 
