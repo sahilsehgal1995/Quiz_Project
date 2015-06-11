@@ -8,6 +8,8 @@
 #include <QTimer>
 #include <QDebug>
 #include <QButtonGroup>
+#include <QDir>
+#include <QDateTime>
 
 void Questions::connection_close()
 {
@@ -88,6 +90,11 @@ void Questions::QuestionList()
             count--;
         }
     }
+}
+
+void Questions::loginid(const QString &logid)
+{
+    id = logid;
 }
 
 void Questions::on_StartTest_pressed()
@@ -215,6 +222,7 @@ void Questions::on_EndTest_clicked()
          ++i;
      }
     QString Finalscore = "Your Final Score is " + QString::number(score);
+    Result_File(QString::number(score));
     this->close();
     QMessageBox::information(this,"Test completition", Finalscore);
 }
@@ -340,4 +348,20 @@ void Questions::on_PreviousQuestion_clicked()
     ui->questionlist->setCurrentRow(row-1);
     else
         ui->questionlist->setCurrentRow(NumberofQuestions-1);
+}
+void Questions::Result_File(const QString &score)
+{
+    QDateTime datetime;
+    QString DateTime= datetime.currentDateTime().toString();
+    QDir directory;
+    QString filepath=directory.absoluteFilePath("result.txt");
+    QFile mfile(filepath);
+    if(!mfile.open(QFile::Append | QFile::Text))
+    {
+        qDebug()<<"Cannot open file";
+    }
+    QTextStream out(&mfile);
+    out<<id<<"  "<<score<<"  "<<DateTime<<"\n";
+    mfile.flush();
+    mfile.close();
 }

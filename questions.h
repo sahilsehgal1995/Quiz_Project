@@ -25,6 +25,8 @@ public:
     explicit Questions(QWidget *parent = 0);
     ~Questions();
     void QuestionList();
+    void loginid(const QString &logid);
+    QString id;
 
 private slots:
     void on_StartTest_pressed();
@@ -59,7 +61,7 @@ public:
     QTimer *mytimer;
     QTime *timevalue;
     int minutes,seconds,i;
-
+    void Result_File(const QString &score);
 public slots:
     void timeoutslot();
 };
