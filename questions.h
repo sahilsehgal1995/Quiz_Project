@@ -31,15 +31,9 @@ public:
 private slots:
     void on_StartTest_pressed();
 
-    void on_QuestionList_activated(const QModelIndex &index);
-
-    void on_tableView_clicked(const QModelIndex &index);
-
     void on_MarkAnswer_clicked();
 
     void on_EndTest_clicked();
-
-    void on_StartTest_clicked();
 
     void on_questionlist_itemSelectionChanged();
 
