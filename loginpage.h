@@ -5,6 +5,8 @@
 #include <QSqlDatabase>
 #include <QFileInfo>
 #include <QSqlQuery>
+#include "questions.h"
+#include "settings.h"
 
 namespace Ui {
 class LoginPage;
@@ -25,9 +27,14 @@ public:
 private slots:
     void on_Login_button_clicked();
 
+    void on_actionBasic_settings_triggered();
+
 private:
     Ui::LoginPage *ui;
     void DatabaseUpdation(const QString &username);
+    Questions q_Dialog;
+    settings mysettings;
+    void BasicSettings();
 };
 
 #endif // LOGINPAGE_H

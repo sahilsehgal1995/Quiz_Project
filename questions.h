@@ -25,7 +25,6 @@ public:
     explicit Questions(QWidget *parent = 0);
     ~Questions();
     void QuestionList();
-    void loginid(const QString &logid);
     QString id;
 
 private slots:
@@ -49,13 +48,15 @@ private:
     QHash<QString, int> QuestionMapping;
     QHash<QString, QString> Responses;
     QHash<QString, int> OptionMarked;
-    int NumberofQuestions;
 
 public:
     QTimer *mytimer;
     QTime *timevalue;
     int minutes,seconds,i;
+    int testquestions, hours,NoOfQuestions;
     void Result_File(const QString &score);
+    void BasicSettings();
+
 public slots:
     void timeoutslot();
 };

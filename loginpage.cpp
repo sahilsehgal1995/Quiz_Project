@@ -1,6 +1,5 @@
 #include "loginpage.h"
 #include "ui_loginpage.h"
-#include "questions.h"
 #include <QDebug>
 void LoginPage::connection_close()
 {
@@ -38,6 +37,7 @@ LoginPage::LoginPage(QWidget *parent) :
         ui->database_status->setText("Connected");
     }
 
+
 }
 
 LoginPage::~LoginPage()
@@ -58,6 +58,15 @@ void LoginPage::DatabaseUpdation(const QString &username)
         if(query.exec())
         return;
     }
+}
+
+void LoginPage::BasicSettings()
+{
+    q_Dialog.minutes=mysettings.NoOfMinutes;
+    q_Dialog.seconds=mysettings.NoOfSeconds;
+    q_Dialog.hours=mysettings.NoOfHours;
+    q_Dialog.NoOfQuestions=mysettings.NoOfQuestions;
+    q_Dialog.testquestions=mysettings.testquestions;
 }
 
 void LoginPage::on_Login_button_clicked()
@@ -86,9 +95,11 @@ void LoginPage::on_Login_button_clicked()
                 ui->Status->setText("Login Successfull");
                 DatabaseUpdation(username);
                 connection_close();
-                Questions q_Dialog;
+
                 q_Dialog.setModal(true);
-                q_Dialog.loginid(username);
+                q_Dialog.id=username;
+                BasicSettings();
+                q_Dialog.BasicSettings();
                 q_Dialog.exec();
                 this->close();
 
@@ -98,4 +109,9 @@ void LoginPage::on_Login_button_clicked()
         }
     }
 
+}
+
+void LoginPage::on_actionBasic_settings_triggered()
+{
+    mysettings.exec();
 }

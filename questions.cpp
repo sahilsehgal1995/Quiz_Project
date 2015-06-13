@@ -19,6 +19,9 @@ void Questions::connection_close()
 
 bool Questions::connection_open()
 {
+    QuestionsDatabase = QSqlDatabase::addDatabase("QSQLITE");
+    QuestionsDatabase.setDatabaseName("/home/sahil/qt/sequel/Sequel/questionare.db");
+
     if(QuestionsDatabase.open())
     {
         ui->DatabaseStatus->setText("Connected");
@@ -36,11 +39,10 @@ Questions::Questions(QWidget *parent) :
     ui(new Ui::Questions)
 {
     ui->setupUi(this);
-    QuestionsDatabase = QSqlDatabase::addDatabase("QSQLITE");
-    QuestionsDatabase.setDatabaseName("/home/sahil/qt/sequel/Sequel/questionare.db");
 
     if(!connection_open())
     QMessageBox::warning(this,"Warning","Database not connected");
+
     ui->groupBox->setHidden(true);
     ui->MarkAnswer->setHidden(true);
     ui->CorrectAnswer->setHidden(true);
@@ -50,20 +52,12 @@ Questions::Questions(QWidget *parent) :
     ui->NextQuestion->setHidden(true);
     ui->Question->viewport()->setAutoFillBackground(false);
     ui->PreviousQuestion->setHidden(true);
-    NumberofQuestions=10;
+    testquestions=10;
 
     mytimer = new QTimer(this);
-
-    minutes = 5;
-    seconds = 0;
     i = -1;
-    timevalue = new QTime(0,5,0,0);
-
-    QString val= timevalue->toString();
-    ui->ledNumber->display(val);
-
+    timevalue = new QTime(hours,minutes,seconds,0);
     connect(mytimer, SIGNAL(timeout()),this, SLOT(timeoutslot()));
-    QuestionList();
 }
 
 Questions::~Questions()
@@ -76,9 +70,10 @@ void Questions::QuestionList()
     QTime time = QTime::currentTime();
     qsrand((uint)time.msec());
     int count, i=1;
-    count=NumberofQuestions;
+    count=testquestions;
+    qDebug()<<QString::number(count);
     while(count){
-        int x = qrand() % ((40 + 1) - 1) + 1;
+        int x = qrand() % ((NoOfQuestions + 1) - 1) + 1;
         int index = qlist.indexOf(x);
         if(index==-1)
         {
@@ -90,11 +85,6 @@ void Questions::QuestionList()
             count--;
         }
     }
-}
-
-void Questions::loginid(const QString &logid)
-{
-    id = logid;
 }
 
 void Questions::on_StartTest_pressed()
@@ -335,7 +325,7 @@ void Questions::on_UnMarkAnswer_clicked()
 void Questions::on_NextQuestion_clicked()
 {
     int row = ui->questionlist->currentRow();
-    if(row != NumberofQuestions-1)
+    if(row != testquestions-1)
     ui->questionlist->setCurrentRow(row+1);
     else
         ui->questionlist->setCurrentRow(0);
@@ -347,7 +337,19 @@ void Questions::on_PreviousQuestion_clicked()
     if(row != 0)
     ui->questionlist->setCurrentRow(row-1);
     else
-        ui->questionlist->setCurrentRow(NumberofQuestions-1);
+        ui->questionlist->setCurrentRow(testquestions-1);
+}
+
+void Questions::BasicSettings()
+{
+    mytimer = new QTimer(this);
+    i = -1;
+    mytimer = new QTimer(this);
+    timevalue = new QTime(hours,minutes,seconds,0);
+    ui->ledNumber->display(timevalue->toString());
+    connect(mytimer, SIGNAL(timeout()),this, SLOT(timeoutslot()));
+    QuestionList();
+
 }
 void Questions::Result_File(const QString &score)
 {

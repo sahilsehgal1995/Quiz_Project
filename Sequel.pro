@@ -14,12 +14,15 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         loginpage.cpp \
-    questions.cpp
+    questions.cpp \
+    settings.cpp
 
 HEADERS  += loginpage.h \
-    questions.h
+    questions.h \
+    settings.h
 
 FORMS    += loginpage.ui \
-    questions.ui
+    questions.ui \
+    settings.ui
 
 RESOURCES +=
