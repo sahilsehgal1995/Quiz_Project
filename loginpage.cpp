@@ -1,6 +1,7 @@
 #include "loginpage.h"
 #include "ui_loginpage.h"
 #include <QDebug>
+#include <QDir>
 void LoginPage::connection_close()
 {
     mydb.close();
@@ -25,8 +26,11 @@ LoginPage::LoginPage(QWidget *parent) :
     ui->statusBar->setWindowOpacity(0.5);
 
     ui->statusBar->showMessage("University Institute of Engineering Technology, Panjab University");
+
+    QDir directory;
+    QString filepath=directory.absoluteFilePath("loginusers.db");
     mydb = QSqlDatabase::addDatabase("QSQLITE");
-    mydb.setDatabaseName("/home/sahil/qt/sequel/Sequel/loginusers.db");
+    mydb.setDatabaseName(filepath);
 
     if(!connection_open())
     {

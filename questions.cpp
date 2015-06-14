@@ -20,7 +20,9 @@ void Questions::connection_close()
 bool Questions::connection_open()
 {
     QuestionsDatabase = QSqlDatabase::addDatabase("QSQLITE");
-    QuestionsDatabase.setDatabaseName("/home/sahil/qt/sequel/Sequel/questionare.db");
+    QDir directory;
+    QString filepath=directory.absoluteFilePath("questionare.db");
+    QuestionsDatabase.setDatabaseName(filepath);
 
     if(QuestionsDatabase.open())
     {
