@@ -98,15 +98,11 @@ void LoginPage::on_Login_button_clicked()
             {
                 ui->Status->setText("Login Successfull");
                 DatabaseUpdation(username);
-                connection_close();
-
                 q_Dialog.setModal(true);
                 q_Dialog.id=username;
                 BasicSettings();
                 q_Dialog.BasicSettings();
                 q_Dialog.exec();
-                this->close();
-
             }
             else
                 ui->Status->setText("Authentication Failed");

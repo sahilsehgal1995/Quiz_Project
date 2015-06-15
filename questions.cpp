@@ -73,7 +73,6 @@ void Questions::QuestionList()
     qsrand((uint)time.msec());
     int count, i=1;
     count=testquestions;
-    qDebug()<<QString::number(count);
     while(count){
         int x = qrand() % ((NoOfQuestions + 1) - 1) + 1;
         int index = qlist.indexOf(x);
