@@ -227,6 +227,7 @@ void Questions::timeoutslot()
     TimeChange = TimeChange.addSecs(i);
     if(TimeChange.toString() == TimeOver.toString())
     {
+        mytimer->stop();
         on_EndTest_clicked();
     }
     else

@@ -65,7 +65,7 @@
      <set>Qt::NoTextInteraction</set>
     </property>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>21</x>
@@ -243,7 +243,7 @@
       </widget>
       <widget class="QPushButton" name="MarkAnswer">
        <property name="text">
-        <string>Mark Answer</string>
+        <string>Save Answer</string>
        </property>
       </widget>
      </widget>
