@@ -54,6 +54,7 @@ public:
     QTime *timevalue;
     int minutes,seconds,i;
     int testquestions, hours,NoOfQuestions;
+    QString ShowResult;
     void Result_File(const QString &score);
     void BasicSettings();
 

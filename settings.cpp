@@ -13,11 +13,13 @@ settings::settings(QWidget *parent) :
     NoOfMinutes=5;
     NoOfSeconds=0;
     testquestions=10;
+    ShowResult = "yes";
     ui->questions->setText(QString::number(40));
     ui->hours->setText(QString::number(0));
     ui->minutes->setText(QString::number(5));
     ui->seconds->setText(QString::number(0));
     ui->testquestions->setText(QString::number(10));
+    ui->ShowResult->setText("yes");
     ui->splitter_2->setHidden(true);
 }
 
@@ -47,6 +49,6 @@ void settings::on_buttonBox_accepted()
     NoOfMinutes=ui->minutes->text().toInt();
     NoOfSeconds=ui->seconds->text().toInt();
     testquestions=ui->testquestions->text().toInt();
-
+    ShowResult=ui->showResultLabel->text();
     ui->splitter_2->setHidden(true);
 }

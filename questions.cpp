@@ -215,6 +215,8 @@ void Questions::on_EndTest_clicked()
     QString Finalscore = "Your Final Score is " + QString::number(score);
     Result_File(QString::number(score));
     this->close();
+    x = (QString::compare(ShowResult, "yes", Qt::CaseInsensitive));
+    if(x==0)
     QMessageBox::information(this,"Test completition", Finalscore);
 }
 

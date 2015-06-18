@@ -71,6 +71,7 @@ void LoginPage::BasicSettings()
     q_Dialog.hours=mysettings.NoOfHours;
     q_Dialog.NoOfQuestions=mysettings.NoOfQuestions;
     q_Dialog.testquestions=mysettings.testquestions;
+    q_Dialog.ShowResult=mysettings.ShowResult;
 }
 
 void LoginPage::on_Login_button_clicked()

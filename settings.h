@@ -21,6 +21,7 @@ public:
     int NoOfMinutes;
     int NoOfSeconds;
     int testquestions;
+    QString ShowResult;
 
 private slots:
     void on_Enter_clicked();
